@@ -15,17 +15,17 @@
 #define CAMERA_MODEL_AI_THINKER // Has PSRAM
 
 //alamat dan password wifi kalian
-const char* ssid = "punyaku";
-const char* password = "12345678";
+const char* ssid = "*******";
+const char* password = "********";
 
 //api tele
-String BOTtoken = "6682783790:AAGuxnOaG_J-BinPkRvej8V8iMFykamzy5g"; // token dari botfather tele
-String chatId = "1329740852"; //id chat dari id bot
+String BOTtoken = "**********"; // token from botfather tele
+String chatId = "********"; //id chat from id bot
 
 //informasi thinkspeak
-char* writeApi = "XTKFCFYC2DL01YQJ";
-char* readApi = "X9H8P3MMETIUOO4L";
-const long channelId = 2372264;
+char* writeApi = "*********";
+char* readApi = "*********";
+const long channelId = **********;
 
 bool sendPhoto = false;
 
