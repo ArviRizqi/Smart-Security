@@ -11,6 +11,7 @@
 #include <EEPROM.h>   
 #include <Wire.h>
 #include <ThingSpeak.h>
+#include <TensorFlowLite.h>
 
 #define CAMERA_MODEL_AI_THINKER // Has PSRAM
 
@@ -146,7 +147,25 @@ void setup() {
   config.jpeg_quality = 12;
   config.fb_count = 1;
   
- 
+  tflite::Model* model = tflite::Model::CreateFromFile("model.tflite");
+  tflite::Tensor* inputTensor = model->input(0);
+  tflite::Tensor* outputTensor = model->output(0);
+  inputTensor->SetShape({1, 32, 32, 3});
+  tflite::Interpreter* interpreter = tflite::Interpreter::Create(model, tflite::Allocator::GetAllocator(kTfLiteMmapAllocator));
+  interpreter->AllocateTensors();
+  uint8_t* inputData = (uint8_t*)inputTensor->data.data;
+  for (int i = 0; i < outputTensor->dims->size; i++) {
+  if (outputData[i] > 0.5) {
+  Serial.println("Ada orang");
+    }
+  }
+  interpreter->Release();
+  model->Release();
+  inputTensor->data.free();
+  outputTensor->data.free();
+  esp_camera_fb_return(fb);
+  
+  
   if(psramFound()){
     config.frame_size = FRAMESIZE_UXGA;
     config.jpeg_quality = 10;  //0-63 lower number means higher quality
